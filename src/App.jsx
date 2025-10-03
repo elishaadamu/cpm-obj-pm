@@ -11,7 +11,7 @@ const HierarchicalTree = () => {
 
   // The JSON data from your uploaded file
   const data = {
-    name: "PLAN2050 Goals-Obj",
+    name: "Plan2050-PM",
     children: [
       {
         name: "Reduce Highway Congestion",
