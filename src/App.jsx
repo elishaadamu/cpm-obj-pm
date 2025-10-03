@@ -397,17 +397,18 @@ const HierarchicalTree = () => {
     update(root);
 
     // Center the initial view
+    const scale = 0.8;
     const initialX = margin.left;
-    const initialY = margin.top - root.x0;
+    const initialY = margin.top + height / 2 - root.x0 * scale;
     const initialTransform = d3.zoomIdentity
       .translate(initialX, initialY)
-      .scale(0.8);
+      .scale(scale);
 
     svg.call(zoomHandler.transform, initialTransform);
   }, []);
 
   return (
-    <div className="bg-slate-900">
+    <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900">
       <Headers />
       <div className="p-2">
         <div className="overflow-auto mb-6 min-h-screen">
