@@ -180,10 +180,10 @@ const HierarchicalTree = () => {
           "transform",
           (d) => `translate(${source.y0 || 0},${source.x0 || 0})`
         )
+        .style("fill-opacity", 1e-6) // Start transparent for fade-in
         .on("click", (event, d) => {
           if (d.children || d._children) {
             toggle(d);
-            update(d);
           }
         }) // Add hover effects for the button
         .on("mouseenter", function (event, d) {
@@ -306,7 +306,7 @@ const HierarchicalTree = () => {
         .append("text")
         .attr("x", (d) => d.boxWidth / 2 - 20)
         .attr("y", (d) => -d.boxHeight / 2 + 20)
-        .attr("dy", "0.50em")
+        .attr("dy", "0.35em")
         .attr("text-anchor", "middle")
         .style("font-size", "20px")
         .style("font-weight", "bold")
@@ -320,7 +320,8 @@ const HierarchicalTree = () => {
       nodeUpdate
         .transition()
         .duration(duration)
-        .attr("transform", (d) => `translate(${d.y},${d.x})`);
+        .attr("transform", (d) => `translate(${d.y},${d.x})`)
+        .style("fill-opacity", 1); // Fade in nodes
 
       nodeUpdate
         .select("text:last-child")
@@ -341,9 +342,8 @@ const HierarchicalTree = () => {
           "transform",
           (d) => `translate(${source.y || 0},${source.x || 0})`
         )
+        .style("fill-opacity", 1e-6) // Fade out nodes
         .remove();
-      nodeExit.select("rect").style("fill-opacity", 1e-6);
-      nodeExit.select("text").style("fill-opacity", 1e-6);
 
       // Update the links
       const link = g.selectAll("path.link").data(links, (d) => d.id);
